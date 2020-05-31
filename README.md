@@ -8,7 +8,19 @@ $ keytool -genkeypair -v -keystore my-upload-key.keystore -alias my-key-alias -k
 
 ---
 
-## Development android:
+## Development Web and Mobile (Recommended):
+
+```
+  terminal 1
+  $ yarn start
+
+  terminal 2
+  $ yarn web
+```
+
+Go to http://localhost:19002/ then scan QR from expo
+
+## Development Android Only:
 
 ```
   terminal 1
