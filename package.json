@@ -29,5 +29,12 @@
   "jest": {
     "preset": "react-native"
   },
-  "private": true
+  "private": true,
+  "prettier": {
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true,
+    "useTabs": true,
+    "printWidth": 110
+  }
 }
