@@ -8,28 +8,16 @@ $ keytool -genkeypair -v -keystore my-upload-key.keystore -alias my-key-alias -k
 
 ---
 
-## Development Web and Mobile (Recommended):
+## Development Web and Mobile:
 
 ```
-  terminal 1
-  $ yarn start
-
-  terminal 2
-  $ yarn web
+$ expo start
 ```
 
-Go to http://localhost:19002/ then scan QR from expo
+Go to http://localhost:19002/
 
-## Development Android Only:
-
-```
-  terminal 1
-  $ yarn start
-
-  terminal 2
-  $ adb reverse tcp:8081 tcp:8081
-  $ yarn android
-```
+For mobile click Run on Android device/emulator. If not working, run \$ adb reverse tcp:8081 tcp:8081
+For web click Run in web browser
 
 ## Build android:
 

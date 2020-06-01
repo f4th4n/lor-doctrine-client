@@ -1,46 +1,49 @@
-import React, { useState } from 'react'
-import { View, Text, Button } from 'react-native'
-import { useFonts } from '@use-expo/font'
-import { AppLoading } from 'expo'
+import React from 'react'
+import { View, Text, Button, PixelRatio, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
 import config from '../../config.json'
-import FlipCard from 'react-native-flip-card'
-import data from '../../assets/data/set1-en_us.json'
+import NextButton from '../components/NextButton'
+import TutorialProgress from '../components/TutorialProgress'
+import TutorialCard from '../components/TutorialCard'
+import Header from '../components/Header'
 
 function LevelScreen({ navigation }) {
-  const [flip, setFlip] = useState(false)
-  const [isLoaded] = useFonts({ oswald: require('../../assets/fonts/Oswald-Regular.ttf') })
-
-  if (!isLoaded) return <AppLoading />
-
-  setTimeout(() => {
-    setFlip(true)
-  }, 1000)
-  console.log('data', data)
-
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: config.color.secondary,
-      }}
-    >
-      <Text style={{ fontFamily: 'oswald' }}>Level Screen</Text>
-      <Button title="Go to Home" onPress={() => navigation.navigate('HomeScreen')} />
+    <View style={styles.root}>
+      <Header />
 
-      <FlipCard flipHorizontal={true} flip={flip}>
-        {/* Face Side */}
-        <View>
-          <Text style={{ color: 'white' }}>The Face</Text>
+      <View style={styles.content}>
+        <View style={styles.card}>
+          <TutorialCard />
+          <TutorialProgress />
         </View>
-        {/* Back Side */}
-        <View>
-          <Text style={{ color: 'white' }}>The Back</Text>
+
+        <View style={styles.next}>
+          <NextButton />
         </View>
-      </FlipCard>
+      </View>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: config.color.secondary,
+  },
+  content: {
+    flex: 90,
+  },
+  card: {
+    flex: 80,
+    alignItems: 'center',
+  },
+  next: {
+    flex: 20,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
+})
 
 export default LevelScreen
