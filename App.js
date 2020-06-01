@@ -6,12 +6,12 @@ import { Provider, connect } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import HomeScreen from './src/screens/HomeScreen'
 import LevelScreen from './src/screens/LevelScreen'
-import answerReducer from './src/store/AnswerReducer'
+import reducers from './src/store/reducers/index'
 import config from './config.json'
 import { useFonts } from '@use-expo/font'
 import { AppLoading } from 'expo'
 
-const store = createStore(answerReducer)
+const store = createStore(reducers)
 const Stack = createStackNavigator()
 
 function App() {

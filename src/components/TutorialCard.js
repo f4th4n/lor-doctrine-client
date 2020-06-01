@@ -3,37 +3,44 @@ import { View, Text, Button, PixelRatio, Image, StyleSheet, Dimensions, Touchabl
 import FlipCard from 'react-native-flip-card'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import config from '../../config.json'
 
-function TutorialCard() {
+function Card(props) {
+  if (props.index === 0)
+    return <Text style={styles.initText}>Remember the following card, then tap button below</Text>
+
+  const uri = props.questions[props.index - 1].assets[0].gameAbsolutePath
+  return (
+    <Image
+      source={{ uri }}
+      style={{
+        height: Dimensions.get('window').height * 0.6,
+        width: Dimensions.get('window').width * 0.6,
+        aspectRatio: 1,
+      }}
+      resizeMode={'contain'}
+    />
+  )
+}
+
+function TutorialCard(props) {
   const [flip, setFlip] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => {
-      console.log('flip', flip)
-      //setFlip(!flip)
-    }, 2000)
-  }, [flip])
+    if (props.tutorial.index === 0 || props.tutorial.index > config.tutorial.cardCount) return
+
+    setFlip(!flip)
+  }, [props.tutorial.index])
 
   return (
     <FlipCard flipVertical={true} flip={flip} clickable={false} style={styles.root}>
       {/* face side */}
       <View style={styles.root}>
-        <Text style={styles.initText}>Remember the following card, then click Next Card button below</Text>
+        <Card index={props.tutorial.index} questions={props.questions} />
       </View>
       {/* back side */}
       <View style={styles.root}>
-        <Image
-          source={{
-            //uri: 'https://dd.b.pvp.net/1_2_0/set1/en_us/img/cards/01IO012T2.png',
-            uri: 'http://192.168.1.9:8001/out.png',
-          }}
-          style={{
-            width: Dimensions.get('window').width * 0.7,
-            height: Dimensions.get('window').height * 0.7,
-            aspectRatio: 1,
-          }}
-          resizeMode={'contain'}
-        />
+        <Card index={props.tutorial.index} questions={props.questions} />
       </View>
     </FlipCard>
   )
@@ -41,30 +48,25 @@ function TutorialCard() {
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
+    flex: 9,
     justifyContent: 'center',
     alignItems: 'center',
   },
   initText: {
+    backgroundColor: '#423645',
     color: 'white',
     fontSize: 20,
     textAlign: 'center',
     fontFamily: 'pusab',
-    padding: 10,
+    padding: 50,
   },
 })
 
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(
-    {
-      //addAnswer,
-    },
-    dispatch
-  )
+const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch)
 
 const mapStateToProps = (state) => {
-  const { answers } = state
-  return { answers }
+  const { tutorial, questions } = state
+  return { tutorial, questions }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TutorialCard)
