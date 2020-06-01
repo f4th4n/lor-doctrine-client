@@ -27,7 +27,7 @@ function App() {
     <Provider store={store}>
       <NavigationContainer>
         <StatusBar barStyle="light-content" backgroundColor={config.color.secondary} />
-        <Stack.Navigator initialRouteName="LevelScreen" headerMode="none">
+        <Stack.Navigator initialRouteName="HomeScreen" headerMode="none">
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="LevelScreen" component={LevelScreen} />
         </Stack.Navigator>

@@ -6,8 +6,7 @@ import { bindActionCreators } from 'redux'
 import config from '../../config.json'
 
 function Card(props) {
-  if (props.index === 0)
-    return <Text style={styles.initText}>Remember the following card, then tap button below</Text>
+  if (props.index === 0) return <Text style={styles.initText}>Remember the following card</Text>
 
   const uri = props.questions[props.index - 1].assets[0].gameAbsolutePath
   return (

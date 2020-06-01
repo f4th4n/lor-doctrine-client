@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { View, Text, Button, PixelRatio, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import { View, Text, PixelRatio, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import config from '../../config.json'
@@ -28,7 +28,7 @@ function LevelScreen(props) {
 
   return (
     <View style={styles.root}>
-      <Header />
+      <Header navigation={props.navigation} />
       {!props.tutorial.finished && <Tutorial />}
       {props.tutorial.finished && <Question />}
     </View>

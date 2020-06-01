@@ -1,13 +1,19 @@
 import React from 'react'
 import config from '../../config.json'
-import { View, Text, Button, PixelRatio, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import { View, Text, PixelRatio, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
 import helper from '../helper'
 
-function Header() {
+function Header(props) {
+  const onPress = () => {
+    props.navigation.navigate('HomeScreen')
+  }
+
   return (
     <View style={styles.header}>
-      <Text style={styles.text}>Legends of Runeterra Doctrine</Text>
+      <TouchableOpacity onPress={onPress}>
+        <Text style={styles.text}>Legends of Runeterra Doctrine</Text>
+      </TouchableOpacity>
     </View>
   )
 }
