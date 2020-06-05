@@ -12,6 +12,7 @@ import { tutorialFinished } from '../store/actions/tutorial-action'
 function LevelScreen(props) {
   useEffect(() => {
     props.setQuestions()
+    props.tutorialFinished() // testtest
   }, [])
 
   useEffect(() => {
@@ -28,6 +29,7 @@ function LevelScreen(props) {
 
   return (
     <View style={styles.root}>
+      <Image source={{ uri: props.level.bg }} style={styles.bgImage} />
       <Header navigation={props.navigation} />
       {!props.tutorial.finished && <Tutorial />}
       {props.tutorial.finished && <Question />}
@@ -42,13 +44,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: config.color.secondary,
   },
+  bgImage: {
+    width: '100%',
+    height: '100%',
+    opacity: 0.1,
+    position: 'absolute',
+  },
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({ setQuestions, tutorialFinished }, dispatch)
 
 const mapStateToProps = (state) => {
-  const { tutorial, questions } = state
-  return { tutorial, questions }
+  const { tutorial, questions, level } = state
+  return { tutorial, questions, level }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LevelScreen)

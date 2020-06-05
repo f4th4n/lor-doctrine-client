@@ -48,6 +48,9 @@ const styles = StyleSheet.create({
     fontFamily: 'friz',
     textAlign: 'center',
     padding: 70,
+    textShadowColor: '#FF6347',
+    textShadowOffset: { width: -2, height: 2 },
+    textShadowRadius: 10,
   },
   btnContainer: {
     width: helper.widthPercentageToDP(70),

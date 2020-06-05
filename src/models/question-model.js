@@ -17,6 +17,28 @@ const Question = {
     const randomIndices = generateRandomIndices()
     return randomIndices.map((index) => cards[index])
   },
+
+  generateFromRow: (row) => {
+    return {
+      questionType: 'region',
+      title: 'What region is this card?',
+      answerOptions: Question.getRandomRegions(),
+      correctAnswer: row.region,
+    }
+  },
+
+  getRandomRegions: () => {
+    const count = 4
+    const regions = ['Ionia', 'Noxus', 'Demacia', 'Piltover & Zaun', 'Freljord', 'Shadow Isles', 'Bilgewater']
+
+    var randomRegions = []
+    while (randomRegions.length < count) {
+      var r = Math.floor(Math.random() * regions.length)
+      if (randomRegions.indexOf(r) === -1) randomRegions.push(r)
+    }
+
+    return randomRegions.map((index) => regions[index])
+  },
 }
 
 export default Question

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Button, PixelRatio, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import { View, Text, PixelRatio, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
 import FlipCard from 'react-native-flip-card'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import config from '../../config.json'
 
 function Card(props) {
-  if (props.index === 0) return <Text style={styles.initText}>Remember the following card</Text>
+  if (props.index === 0) return <Text style={styles.initText}>Remember the following card!!</Text>
 
   const uri = props.questions[props.index - 1].assets[0].gameAbsolutePath
   return (
