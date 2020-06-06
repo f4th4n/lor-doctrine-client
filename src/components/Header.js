@@ -20,15 +20,21 @@ function Header(props) {
 
 const styles = StyleSheet.create({
   header: {
-    flex: 10,
-    marginTop: helper.heightPercentageToDP(2),
+    flex: 5,
+    justifyContent: 'center',
+    paddingTop: helper.heightPercentageToDP(0.5),
+    paddingBottom: helper.heightPercentageToDP(0.5),
+    marginBottom: helper.heightPercentageToDP(1.5),
+    borderBottomColor: 'white',
+    borderBottomWidth: 2,
+    width: '100%',
+    backgroundColor: 'rgba(19, 2, 31, 0.4)',
   },
   text: {
     fontSize: RFValue(16),
     color: 'white',
     fontFamily: 'friz',
     textAlign: 'center',
-    textDecorationLine: 'underline',
   },
 })
 

@@ -4,11 +4,12 @@ import FlipCard from 'react-native-flip-card'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import config from '../../config.json'
+import ImageModel from '../models/image-model'
 
 function Card(props) {
   if (props.index === 0) return <Text style={styles.initText}>Remember the following card!!</Text>
 
-  const uri = props.questions[props.index - 1].assets[0].gameAbsolutePath
+  const uri = ImageModel.normal(props.questions[props.index - 1], 'card')
   return (
     <Image
       source={{ uri }}

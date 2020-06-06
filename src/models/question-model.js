@@ -4,7 +4,8 @@ import config from '../../config'
 const Question = {
   getRandom: () => {
     const generateRandomIndices = () => {
-      const cardsLen = cards.length
+      // const cardsLen = cards.length
+      const cardsLen = 5 // TODO CHANGE THIS
       var randomIndices = []
       while (randomIndices.length < config.tutorial.cardCount) {
         var r = Math.floor(Math.random() * cardsLen)

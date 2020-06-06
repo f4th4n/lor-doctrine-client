@@ -1,4 +1,7 @@
 {
+  "endpoint": {
+    "image": "https://storage.googleapis.com/lor-cards/"
+  },
   "color": {
     "primary": "#d5d2c9",
     "secondary": "#29242a",

@@ -33,12 +33,14 @@ const styles = StyleSheet.create({
   root: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',
+    marginBottom: helper.heightPercentageToDP(3),
   },
   btnContainer: {
-    width: helper.widthPercentageToDP(40),
-    marginRight: helper.widthPercentageToDP(2),
+    flexGrow: 1,
+    marginRight: helper.widthPercentageToDP(4),
+    marginLeft: helper.widthPercentageToDP(4),
     marginBottom: helper.heightPercentageToDP(1),
   },
   btn: {

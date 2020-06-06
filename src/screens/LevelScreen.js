@@ -8,6 +8,7 @@ import Tutorial from '../components/Tutorial'
 import Question from '../components/Question'
 import { setQuestions } from '../store/actions/question-action'
 import { tutorialFinished } from '../store/actions/tutorial-action'
+import ImageModel from '../models/image-model'
 
 function LevelScreen(props) {
   useEffect(() => {
@@ -17,7 +18,8 @@ function LevelScreen(props) {
 
   useEffect(() => {
     for (let question of props.questions) {
-      Image.prefetch(question.assets[0].gameAbsolutePath)
+      Image.prefetch(ImageModel.normal(question, 'card'))
+      Image.prefetch(ImageModel.normal(question, 'bg'))
     }
   }, [props.questions])
 

@@ -26,7 +26,7 @@ function Tutorial(props) {
 
 const styles = StyleSheet.create({
   root: {
-    flex: 90,
+    flex: 95,
   },
   card: {
     flex: 80,

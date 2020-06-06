@@ -3,8 +3,10 @@ import { View, Text, Button, PixelRatio, Image, StyleSheet, Dimensions, Touchabl
 import { connect } from 'react-redux'
 import config from '../../config.json'
 import QuestionModel from '../models/question-model'
+import ImageModel from '../models/image-model'
 import { RFValue } from 'react-native-responsive-fontsize'
 import AnswerOptions from '../components/AnswerOptions'
+import QuestionTitle from '../components/QuestionTitle'
 import { setBg } from '../store/actions/level-action'
 import { bindActionCreators } from 'redux'
 
@@ -24,20 +26,12 @@ function Question(props) {
   }, [])
 
   useEffect(() => {
-    props.setBg(props.questions[props.level.index].assets[0].fullAbsolutePath)
+    props.setBg(ImageModel.normal(props.questions[props.level.index], 'bg'))
   }, [props.level.index])
-
-  const questionImageUri = props.questions[props.level.index].assets[0].gameAbsolutePath
 
   return (
     <View style={styles.root}>
-      <Text style={styles.questionIndex}>
-        Question {props.level.index + 1}/{config.option}
-      </Text>
-      <Text style={styles.questionTitle}>{question.title}</Text>
-
-      <Image source={{ uri: questionImageUri }} style={styles.questionImage} resizeMode={'contain'} />
-
+      <QuestionTitle question={question} />
       <AnswerOptions question={question} />
     </View>
   )
@@ -45,26 +39,9 @@ function Question(props) {
 
 const styles = StyleSheet.create({
   root: {
-    flex: 90,
+    flex: 95,
     alignItems: 'center',
-    justifyContent: 'flex-start',
-  },
-  questionImage: {
-    height: Dimensions.get('window').height * 0.6,
-    width: Dimensions.get('window').width * 0.6,
-    aspectRatio: 1,
-  },
-  questionIndex: {
-    fontSize: RFValue(16),
-    color: '#777',
-    textAlign: 'center',
-  },
-  questionTitle: {
-    fontSize: RFValue(20),
-    color: 'white',
-    fontFamily: 'oswald',
-    textAlign: 'center',
-    padding: 10,
+    justifyContent: 'space-between',
   },
 })
 
