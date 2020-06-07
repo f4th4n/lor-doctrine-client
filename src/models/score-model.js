@@ -26,7 +26,7 @@ const ScoreModel = {
       index++
     }
 
-    console.log('correctAnswers', correctAnswers)
+    return correctAnswers
   },
 }
 

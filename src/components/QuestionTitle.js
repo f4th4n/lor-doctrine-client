@@ -8,8 +8,9 @@ import { setBg } from '../store/actions/level-action'
 import { bindActionCreators } from 'redux'
 
 function QuestionTitle(props) {
-  const card = props.questions[props.level.index].card
-  const questionImageUri = ImageModel.normal(card, 'card')
+  const question = props.questions[props.level.index]
+  const questionImageUri = ImageModel.normal(question, 'card')
+  const isCard = !questionImageUri.includes('-full')
 
   return (
     <View style={styles.questionIndexAndQuestion}>
@@ -18,7 +19,11 @@ function QuestionTitle(props) {
       </Text>
       <Text style={styles.questionTitle}>{props.question.title}</Text>
       <View style={styles.containerImage}>
-        <Image source={{ uri: questionImageUri }} style={styles.questionImage} resizeMode={'contain'} />
+        <Image
+          source={{ uri: questionImageUri }}
+          style={isCard ? styles.questionImageHalf : styles.questionImageAlmostFull}
+          resizeMode={'contain'}
+        />
       </View>
     </View>
   )
@@ -33,7 +38,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flex: 1,
   },
-  questionImage: {
+  questionImageHalf: {
+    height: Dimensions.get('window').height * 0.5,
+    width: Dimensions.get('window').width * 0.5,
+    aspectRatio: 1,
+  },
+  questionImageAlmostFull: {
     height: Dimensions.get('window').height * 0.5,
     width: Dimensions.get('window').width * 0.5,
     aspectRatio: 1,

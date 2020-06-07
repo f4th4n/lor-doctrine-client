@@ -9,8 +9,8 @@ import ImageModel from '../models/image-model'
 function Card(props) {
   if (props.index === 0) return <Text style={styles.initText}>Remember the following card!!</Text>
 
-  const card = props.questions[props.index - 1].card
-  const uri = ImageModel.normal(card, 'card')
+  const question = props.questions[props.index - 1]
+  const uri = ImageModel.tutorial(question, 'card')
   return (
     <Image
       source={{ uri }}

@@ -15,6 +15,8 @@ const tutorialReducer = (state = INITIAL_STATE, action) => {
         ...state,
         finished: true,
       }
+    case 'RESET_TUTORIAL':
+      return { ...INITIAL_STATE }
     default:
       return state
   }

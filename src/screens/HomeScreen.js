@@ -3,8 +3,20 @@ import { View, Text, StyleSheet, ImageBackground, Image } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { Button } from 'react-native-elements'
 import helper from '../helper'
+import { resetLevel } from '../store/actions/level-action'
+import { resetQuestions } from '../store/actions/question-action'
+import { resetTutorial } from '../store/actions/tutorial-action'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-function HomeScreen({ navigation }) {
+function HomeScreen(props) {
+  const onPress = () => {
+    props.resetLevel()
+    props.resetQuestions()
+    props.resetTutorial()
+    props.navigation.navigate('LevelScreen')
+  }
+
   return (
     <View style={styles.root}>
       <Image source={require('../../assets/img/bg.png')} style={styles.bgImage} />
@@ -15,7 +27,7 @@ function HomeScreen({ navigation }) {
           containerStyle={StyleSheet.flatten(styles.btnContainer)}
           buttonStyle={StyleSheet.flatten(styles.btn)}
           titleStyle={StyleSheet.flatten(styles.btnTitle)}
-          onPress={() => navigation.navigate('LevelScreen')}
+          onPress={onPress}
         />
       </View>
     </View>
@@ -69,4 +81,7 @@ const styles = StyleSheet.create({
   },
 })
 
-export default HomeScreen
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ resetLevel, resetQuestions, resetTutorial }, dispatch)
+
+export default connect(null, mapDispatchToProps)(HomeScreen)

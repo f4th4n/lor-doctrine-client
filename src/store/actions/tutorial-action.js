@@ -5,3 +5,7 @@ export const nextCard = () => ({
 export const tutorialFinished = () => ({
   type: 'TUTORIAL_FINISHED',
 })
+
+export const resetTutorial = () => ({
+  type: 'RESET_TUTORIAL',
+})

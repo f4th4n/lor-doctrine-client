@@ -27,6 +27,8 @@ const levelReducer = (state = INITIAL_STATE, action) => {
         ...state,
         finished: true,
       }
+    case 'RESET_LEVEL':
+      return { ...INITIAL_STATE }
     default:
       return state
   }

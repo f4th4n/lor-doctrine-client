@@ -17,7 +17,8 @@ function Question(props) {
   }
 
   useEffect(() => {
-    props.setBg(ImageModel.normal(props.questions[props.level.index].card, 'bg'))
+    const question = props.questions[props.level.index]
+    props.setBg(ImageModel.normal(question, 'bg'))
   }, [props.level.index])
 
   const question = props.questions[props.level.index].question

@@ -2,6 +2,10 @@ export const nextQuestion = () => ({
   type: 'NEXT_QUESTION',
 })
 
+export const resetLevel = () => ({
+  type: 'RESET_LEVEL',
+})
+
 export const makeAnswer = (answer) => ({
   type: 'MAKE_ANSWER',
   payload: answer,
