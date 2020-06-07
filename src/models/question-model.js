@@ -16,10 +16,16 @@ const QuestionModel = {
     }
 
     const randomIndices = generateRandomIndices()
-    return randomIndices.map((index) => cards[index])
+    const getCardAndQuestion = (index) => {
+      return {
+        card: cards[index],
+        question: QuestionModel.getQuestionByCardIndex(index),
+      }
+    }
+    return randomIndices.map((index) => getCardAndQuestion(index))
   },
 
-  generateFromRow: (row) => {
+  getQuestionByCardIndex: (row) => {
     const questions = [
       {
         questionType: 'region',

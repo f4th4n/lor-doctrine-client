@@ -7,7 +7,7 @@ import { RFValue } from 'react-native-responsive-fontsize'
 function TutorialCardDetail(props) {
   if (props.tutorial.index === 0) return <View></View>
 
-  const card = props.questions[props.tutorial.index - 1]
+  const card = props.questions[props.tutorial.index - 1].card
 
   return (
     <View style={styles.root}>

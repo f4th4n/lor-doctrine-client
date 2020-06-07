@@ -8,7 +8,8 @@ import { setBg } from '../store/actions/level-action'
 import { bindActionCreators } from 'redux'
 
 function QuestionTitle(props) {
-  const questionImageUri = ImageModel.normal(props.questions[props.level.index], 'card')
+  const card = props.questions[props.level.index].card
+  const questionImageUri = ImageModel.normal(card, 'card')
 
   return (
     <View style={styles.questionIndexAndQuestion}>

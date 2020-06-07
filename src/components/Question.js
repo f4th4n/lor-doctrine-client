@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import QuestionModel from '../models/question-model'
@@ -16,14 +16,11 @@ function Question(props) {
     correctAnswer: null,
   }
 
-  const [question, setQuestion] = useState(defaultQuestion)
-
   useEffect(() => {
-    const row = props.questions[props.level.index]
-    setQuestion(QuestionModel.generateFromRow(row))
-
-    props.setBg(ImageModel.normal(props.questions[props.level.index], 'bg'))
+    props.setBg(ImageModel.normal(props.questions[props.level.index].card, 'bg'))
   }, [props.level.index])
+
+  const question = props.questions[props.level.index].question
 
   return (
     <View style={styles.root}>

@@ -13,13 +13,13 @@ import ImageModel from '../models/image-model'
 function LevelScreen(props) {
   useEffect(() => {
     props.setQuestions()
-    props.tutorialFinished() // skip tutorial
+    props.tutorialFinished() // uncomment this to skip tutorial
   }, [])
 
   useEffect(() => {
     for (let question of props.questions) {
-      Image.prefetch(ImageModel.normal(question, 'card'))
-      Image.prefetch(ImageModel.normal(question, 'bg'))
+      Image.prefetch(ImageModel.normal(question.card, 'card'))
+      Image.prefetch(ImageModel.normal(question.card, 'bg'))
     }
   }, [props.questions])
 
