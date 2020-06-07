@@ -1,7 +1,17 @@
 import cards from '../../assets/data/cards.json'
 import config from '../../config'
+import helper from '../helper'
+import _ from 'lodash'
 
 const QuestionModel = {
+  answerOptionsCount: {
+    region: 4,
+    name: 4,
+    description: 4,
+    cost: 5,
+    attackHealth: 4,
+  },
+
   getRandom: () => {
     const generateRandomIndices = () => {
       // const cardsLen = cards.length
@@ -28,6 +38,7 @@ const QuestionModel = {
   getQuestionByCardIndex: (index) => {
     const getQuestionType = (card) => {
       // tune chances here
+      // it's like drop rate, if you wanna make some type choosen more often then add them in the array
       var types = [
         'region',
         'region',
@@ -35,8 +46,8 @@ const QuestionModel = {
         'type',
         'name',
         'name',
-        'description',
-        'description',
+        //'description',
+        //'description',
         'cost',
         'cost',
       ]
@@ -73,7 +84,7 @@ const QuestionModel = {
 
     const getAnswerOptionsByType = (type, card) => {
       if (type === 'region') {
-        return QuestionModel.getRandomRegions()
+        return QuestionModel.getRandomRegions(card.region)
       } else if (type === 'type') {
         return ['Spell', 'Unit', 'Ability', 'Trap']
       } else if (type === 'name') {
@@ -85,7 +96,7 @@ const QuestionModel = {
       } else if (type === 'attack-health') {
         return QuestionModel.getAttackHealth(card.attack, card.health)
       } else if (type === 'spell-speed') {
-        return QuestionModel.getSpellSpeed(card.spellSpeed)
+        return QuestionModel.getSpellSpeed()
       }
       return []
     }
@@ -123,37 +134,86 @@ const QuestionModel = {
   },
 
   getRandomRegions: (correctRegion) => {
-    // TODO push correctRegion to randomRegions
-    const count = 4
     const regions = ['Ionia', 'Noxus', 'Demacia', 'Piltover & Zaun', 'Freljord', 'Shadow Isles', 'Bilgewater']
 
     var randomRegions = []
-    while (randomRegions.length < count) {
+    randomRegions.push(regions.indexOf(correctRegion))
+    while (randomRegions.length < QuestionModel.answerOptionsCount.region) {
       var r = Math.floor(Math.random() * regions.length)
       if (randomRegions.indexOf(r) === -1) randomRegions.push(r)
     }
 
-    return randomRegions.map((index) => regions[index])
+    randomRegions = randomRegions.map((index) => regions[index])
+    return _.shuffle(randomRegions)
   },
 
   getRandomCardName: (correctName) => {
-    return []
+    const names = cards.map((card) => card.name)
+
+    var randomNames = []
+    randomNames.push(names.indexOf(correctName))
+    while (randomNames.length < QuestionModel.answerOptionsCount.name) {
+      var r = Math.floor(Math.random() * names.length)
+      if (randomNames.indexOf(r) === -1) randomNames.push(r)
+    }
+
+    randomNames = randomNames.map((index) => names[index])
+    return _.shuffle(randomNames)
   },
 
   getRandomDescription: (correctDescription) => {
-    return []
+    const descriptions = cards.filter((card) => card.description).map((card) => card.description)
+
+    var randomDescriptions = []
+    randomDescriptions.push(descriptions.indexOf(correctDescription))
+    while (randomDescriptions.length < QuestionModel.answerOptionsCount.description) {
+      var r = Math.floor(Math.random() * descriptions.length)
+      if (randomDescriptions.indexOf(r) === -1) randomDescriptions.push(r)
+    }
+
+    randomDescriptions = randomDescriptions.map((index) => helper.getTextFromHTML(descriptions[index]))
+    return _.shuffle(randomDescriptions)
   },
 
   getCosts: (correctCost) => {
-    return ['1/4', '2/4', '3/4']
+    const costs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+    var randomCosts = []
+    randomCosts.push(costs.indexOf(correctCost))
+    while (randomCosts.length < QuestionModel.answerOptionsCount.cost) {
+      var r = Math.floor(Math.random() * costs.length)
+      if (randomCosts.indexOf(r) === -1) randomCosts.push(r)
+    }
+
+    randomCosts = randomCosts.map((index) => costs[index])
+    randomCosts.sort((a, b) => a - b)
+    return randomCosts.map((cost) => cost.toString())
   },
 
-  getAttackHealth: (attack, health) => {
-    return []
+  getAttackHealth: (argAttack, argHealth) => {
+    const attacks = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 30]
+    const healths = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 30]
+
+    var attackHealthList = []
+    for (let attack of attacks) {
+      for (let health of healths) {
+        attackHealthList.push(`${attack.toString()} / ${health.toString()}`)
+      }
+    }
+
+    var randomAttackHealthList = []
+    randomAttackHealthList.push(attackHealthList.indexOf(`${argAttack.toString()} / ${argHealth.toString()}`))
+    while (randomAttackHealthList.length < QuestionModel.answerOptionsCount.attackHealth) {
+      var r = Math.floor(Math.random() * attackHealthList.length)
+      if (randomAttackHealthList.indexOf(r) === -1) randomAttackHealthList.push(r)
+    }
+
+    randomAttackHealthList = randomAttackHealthList.map((index) => attackHealthList[index])
+    return _.shuffle(randomAttackHealthList)
   },
 
-  getSpellSpeed: (spellSpeed) => {
-    return []
+  getSpellSpeed: () => {
+    return ['Burst', 'Fast', 'Slow']
   },
 }
 

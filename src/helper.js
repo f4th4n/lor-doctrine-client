@@ -31,4 +31,8 @@ helper.basename = (path) => {
   return path.substr(path.lastIndexOf('/') + 1)
 }
 
+helper.getTextFromHTML = (html) => {
+  return html.replace(/<[^>]+>/g, '')
+}
+
 export default helper
