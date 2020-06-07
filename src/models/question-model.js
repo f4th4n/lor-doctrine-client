@@ -25,58 +25,101 @@ const QuestionModel = {
     return randomIndices.map((index) => getCardAndQuestion(index))
   },
 
-  getQuestionByCardIndex: (row) => {
-    const questions = [
-      {
-        questionType: 'region',
-        title: 'What region is this card?',
-        answerOptions: QuestionModel.getRandomRegions(),
-        correctAnswer: row.region,
-      },
-      {
-        questionType: 'type',
-        title: 'What type of this card?',
-        answerOptions: ['Spell', 'Unit', 'Ability', 'Trap'],
-        correctAnswer: row.type,
-      },
-      {
-        questionType: 'name',
-        title: 'What is this card name?',
-        answerOptions: QuestionModel.getRandomCardName(row.name),
-        correctAnswer: row.name,
-      },
-      {
-        questionType: 'description',
-        title: 'What is the description of this card?',
-        answerOptions: QuestionModel.getRandomDescription(row.description),
-        correctAnswer: row.description,
-      },
-      {
-        questionType: 'cost',
-        title: 'What is the cost of this card?',
-        answerOptions: QuestionModel.getCosts(row.cost),
-        correctAnswer: row.cost,
-      },
-      {
-        questionType: 'cost',
-        title: 'How many attack/health of this card?',
-        answerOptions: QuestionModel.getAttackHealth(row.attack, row.health),
-        correctAnswer: { cost: row.cost, health: row.health },
-      },
-      {
-        questionType: 'spell-speed',
-        title: 'What is the spell speed of this card?',
-        answerOptions: QuestionModel.getSpellSpeed(row.spellSpeed),
-        correctAnswer: row.spellSpeed,
-      },
-    ]
+  getQuestionByCardIndex: (index) => {
+    const getQuestionType = (card) => {
+      // tune chances here
+      var types = [
+        'region',
+        'region',
+        'type',
+        'type',
+        'name',
+        'name',
+        'description',
+        'description',
+        'cost',
+        'cost',
+      ]
 
-    return {
-      questionType: 'region',
-      title: 'What region is this card?',
-      answerOptions: QuestionModel.getRandomRegions(row.region),
-      correctAnswer: row.region,
+      if (card.attack && card.health) {
+        types.push('attack-health')
+      }
+
+      if (card.spellSpeed) {
+        types.push('spell-speed')
+      }
+
+      return types[Math.floor(Math.random() * types.length)]
     }
+
+    const getTitleByType = (type, card) => {
+      if (type === 'region') {
+        return 'What region is this card?'
+      } else if (type === 'type') {
+        return 'What type of this card?'
+      } else if (type === 'name') {
+        return 'What is this card name?'
+      } else if (type === 'description') {
+        return 'What is the description of this card?'
+      } else if (type === 'cost') {
+        return 'What is the cost of this card?'
+      } else if (type === 'attack-health') {
+        return 'How many attack/health of this card?'
+      } else if (type === 'spell-speed') {
+        return 'What is the spell speed of this card?'
+      }
+      return 'unknown'
+    }
+
+    const getAnswerOptionsByType = (type, card) => {
+      if (type === 'region') {
+        return QuestionModel.getRandomRegions()
+      } else if (type === 'type') {
+        return ['Spell', 'Unit', 'Ability', 'Trap']
+      } else if (type === 'name') {
+        return QuestionModel.getRandomCardName(card.name)
+      } else if (type === 'description') {
+        return QuestionModel.getRandomDescription(card.description)
+      } else if (type === 'cost') {
+        return QuestionModel.getCosts(card.cost)
+      } else if (type === 'attack-health') {
+        return QuestionModel.getAttackHealth(card.attack, card.health)
+      } else if (type === 'spell-speed') {
+        return QuestionModel.getSpellSpeed(card.spellSpeed)
+      }
+      return []
+    }
+
+    const getCorrectAnswerByType = (type, card) => {
+      if (type === 'region') {
+        return card.region
+      } else if (type === 'type') {
+        return card.type
+      } else if (type === 'name') {
+        return card.name
+      } else if (type === 'description') {
+        return card.description
+      } else if (type === 'cost') {
+        return card.cost
+      } else if (type === 'attack-health') {
+        return { attack: card.attack, health: card.health }
+      } else if (type === 'spell-speed') {
+        return card.spellSpeed
+      }
+      return 'unknown'
+    }
+
+    const card = cards[index]
+    const type = getQuestionType(card)
+
+    var question = {
+      questionType: type,
+      title: getTitleByType(type, card),
+      answerOptions: getAnswerOptionsByType(type, card),
+      correctAnswer: getCorrectAnswerByType(type, card),
+    }
+
+    return question
   },
 
   getRandomRegions: (correctRegion) => {
@@ -94,7 +137,7 @@ const QuestionModel = {
   },
 
   getRandomCardName: (correctName) => {
-    // name
+    return []
   },
 
   getRandomDescription: (correctDescription) => {
@@ -102,7 +145,7 @@ const QuestionModel = {
   },
 
   getCosts: (correctCost) => {
-    return [1, 2, 3]
+    return ['1/4', '2/4', '3/4']
   },
 
   getAttackHealth: (attack, health) => {
