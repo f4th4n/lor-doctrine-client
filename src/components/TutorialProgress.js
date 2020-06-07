@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import helper from '../helper'
@@ -7,7 +7,7 @@ import config from '../../config.json'
 
 function TutorialProgress(props) {
   var rects = []
-  for (let counter = 0; counter < config.tutorial.cardCount; counter++) {
+  for (let counter = 0; counter < config.questionCount; counter++) {
     var styleRect = [styles.rectangle]
     if (counter < props.tutorial.index) {
       styleRect.push(styles.filled)

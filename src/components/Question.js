@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Button, PixelRatio, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
-import config from '../../config.json'
 import QuestionModel from '../models/question-model'
 import ImageModel from '../models/image-model'
-import { RFValue } from 'react-native-responsive-fontsize'
 import AnswerOptions from '../components/AnswerOptions'
 import QuestionTitle from '../components/QuestionTitle'
 import { setBg } from '../store/actions/level-action'
@@ -23,9 +21,7 @@ function Question(props) {
   useEffect(() => {
     const row = props.questions[props.level.index]
     setQuestion(QuestionModel.generateFromRow(row))
-  }, [])
 
-  useEffect(() => {
     props.setBg(ImageModel.normal(props.questions[props.level.index], 'bg'))
   }, [props.level.index])
 

@@ -43,3 +43,14 @@ react-native run-ios --configuration=release
 ### Update Version
 
 change versionCode, versionName: android/app/build.gradle
+
+### Fonts
+
+```
+oswald
+  like lor website font
+pusab
+  game, 8 bit
+friz
+  like lol font
+```

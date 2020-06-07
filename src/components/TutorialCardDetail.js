@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { View, Text, Button, PixelRatio, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
-import FlipCard from 'react-native-flip-card'
+import React from 'react'
+import { View, Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import config from '../../config.json'
 import { RFValue } from 'react-native-responsive-fontsize'
 
 function TutorialCardDetail(props) {

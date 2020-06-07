@@ -6,6 +6,7 @@ import { Provider, connect } from 'react-redux'
 import { createStore } from 'redux'
 import HomeScreen from './src/screens/HomeScreen'
 import LevelScreen from './src/screens/LevelScreen'
+import ScoreScreen from './src/screens/ScoreScreen'
 import reducers from './src/store/reducers/index'
 import config from './config.json'
 import { useFonts } from '@use-expo/font'
@@ -19,6 +20,7 @@ function App() {
     oswald: require('./assets/fonts/oswald.ttf'),
     pusab: require('./assets/fonts/8-bit-pusab.ttf'),
     friz: require('./assets/fonts/friz-quadrata.ttf'),
+    montserrat: require('./assets/fonts/montserrat.otf'),
   })
 
   if (!isLoaded) return <AppLoading />
@@ -30,6 +32,7 @@ function App() {
         <Stack.Navigator initialRouteName="LevelScreen" headerMode="none">
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="LevelScreen" component={LevelScreen} />
+          <Stack.Screen name="ScoreScreen" component={ScoreScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

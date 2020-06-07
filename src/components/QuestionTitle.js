@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { View, Text, Button, PixelRatio, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import config from '../../config.json'
-import QuestionModel from '../models/question-model'
 import ImageModel from '../models/image-model'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { setBg } from '../store/actions/level-action'
 import { bindActionCreators } from 'redux'
-import helper from '../helper'
 
 function QuestionTitle(props) {
   const questionImageUri = ImageModel.normal(props.questions[props.level.index], 'card')
@@ -15,7 +13,7 @@ function QuestionTitle(props) {
   return (
     <View style={styles.questionIndexAndQuestion}>
       <Text style={styles.questionIndex}>
-        Question {props.level.index + 1}/{config.option}
+        Question {props.level.index + 1}/{config.questionCount}
       </Text>
       <Text style={styles.questionTitle}>{props.question.title}</Text>
       <View style={styles.containerImage}>

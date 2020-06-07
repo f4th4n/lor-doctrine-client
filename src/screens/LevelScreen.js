@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { View, Text, PixelRatio, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import { View, Image, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import config from '../../config.json'
@@ -13,7 +13,7 @@ import ImageModel from '../models/image-model'
 function LevelScreen(props) {
   useEffect(() => {
     props.setQuestions()
-    props.tutorialFinished() // testtest
+    props.tutorialFinished() // skip tutorial
   }, [])
 
   useEffect(() => {
@@ -24,17 +24,27 @@ function LevelScreen(props) {
   }, [props.questions])
 
   useEffect(() => {
-    if (props.tutorial.index > config.tutorial.cardCount) {
+    if (props.tutorial.index > config.questionCount) {
       props.tutorialFinished()
     }
   }, [props.tutorial.index])
+
+  useEffect(() => {
+    if (props.level.index === config.questionCount) {
+      props.navigation.navigate('ScoreScreen')
+    }
+  }, [props.level.index])
+
+  const scorePage = props.level.index === config.questionCount
+  const showTutorial = !scorePage && !props.tutorial.finished
+  const showQuestion = !scorePage && props.tutorial.finished
 
   return (
     <View style={styles.root}>
       <Image source={{ uri: props.level.bg }} style={styles.bgImage} />
       <Header navigation={props.navigation} />
-      {!props.tutorial.finished && <Tutorial />}
-      {props.tutorial.finished && <Question />}
+      {showTutorial && <Tutorial />}
+      {showQuestion && <Question />}
     </View>
   )
 }

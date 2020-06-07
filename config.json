@@ -7,8 +7,5 @@
     "secondary": "#29242a",
     "tertiary": "#f2fa52"
   },
-  "tutorial": {
-    "cardCount": 5
-  },
-  "option": 5
+  "questionCount": 5
 }

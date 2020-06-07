@@ -1,6 +1,6 @@
 import React from 'react'
 import config from '../../config.json'
-import { View, Text, PixelRatio, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
 import helper from '../helper'
 
@@ -12,7 +12,7 @@ function Header(props) {
   return (
     <View style={styles.header}>
       <TouchableOpacity onPress={onPress}>
-        <Text style={styles.text}>Legends of Runeterra Doctrine</Text>
+        <Text style={styles.text}>✨ Legends of Runeterra Doctrine ✨</Text>
       </TouchableOpacity>
     </View>
   )
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     borderBottomColor: 'white',
     borderBottomWidth: 2,
     width: '100%',
-    backgroundColor: 'rgba(19, 2, 31, 0.4)',
+    backgroundColor: config.color.secondary,
   },
   text: {
     fontSize: RFValue(16),

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, PixelRatio, Image, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native'
 import FlipCard from 'react-native-flip-card'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -27,7 +27,7 @@ function TutorialCard(props) {
   const [flip, setFlip] = useState(false)
 
   useEffect(() => {
-    if (props.tutorial.index === 0 || props.tutorial.index > config.tutorial.cardCount) return
+    if (props.tutorial.index === 0 || props.tutorial.index > config.questionCount) return
 
     setFlip(!flip)
   }, [props.tutorial.index])

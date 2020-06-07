@@ -18,7 +18,6 @@ const levelReducer = (state = INITIAL_STATE, action) => {
         bg: action.payload,
       }
     case 'MAKE_ANSWER':
-      console.log('action.payload', action.payload)
       return {
         ...state,
         answers: [...state.answers, action.payload],

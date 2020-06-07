@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { Button } from 'react-native-elements'
 import { connect } from 'react-redux'
@@ -9,11 +9,11 @@ import helper from '../helper'
 import config from '../../config'
 
 function AnswerButton(props) {
-  const title = props.tutorial.index >= config.tutorial.cardCount ? 'Go To Question' : 'Next Card'
+  const title = props.tutorial.index >= config.questionCount ? 'Go To Question' : 'Next Card'
 
   const baseContainer = [styles.btnContainer]
   const additionalContainer =
-    props.tutorial.index >= config.tutorial.cardCount ? styles.btnContainerFull : styles.btnContainerHalf
+    props.tutorial.index >= config.questionCount ? styles.btnContainerFull : styles.btnContainerHalf
   baseContainer.push(additionalContainer)
 
   return (

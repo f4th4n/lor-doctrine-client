@@ -1,7 +1,5 @@
 import * as React from 'react'
 import { View, Text, StyleSheet, ImageBackground, Image } from 'react-native'
-import config from '../../config.json'
-import Header from '../components/Header'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { Button } from 'react-native-elements'
 import helper from '../helper'
