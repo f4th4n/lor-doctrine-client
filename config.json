@@ -1,4 +1,5 @@
 {
+  "mode": "prod",
   "endpoint": {
     "image": "https://storage.googleapis.com/lor-cards/"
   },

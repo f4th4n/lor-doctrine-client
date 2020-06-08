@@ -14,8 +14,7 @@ const QuestionModel = {
 
   getRandom: () => {
     const generateRandomIndices = () => {
-      // const cardsLen = cards.length
-      const cardsLen = 5 // TODO CHANGE THIS
+      const cardsLen = (config.mode === 'dev' ? 5 : cards.length)
       var randomIndices = []
       while (randomIndices.length < config.questionCount) {
         var r = Math.floor(Math.random() * cardsLen)
