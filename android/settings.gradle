@@ -1,4 +1,4 @@
-rootProject.name = 'lordoctrine'
+rootProject.name = 'lor-doctrine'
 
 apply from: '../node_modules/react-native-unimodules/gradle.groovy'
 includeUnimodulesProjects()

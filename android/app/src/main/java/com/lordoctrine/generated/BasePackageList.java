@@ -1,4 +1,4 @@
-package com.lordoctrine.generated;
+package top.bunga.lordoctrine.generated;
 
 import java.util.Arrays;
 import java.util.List;

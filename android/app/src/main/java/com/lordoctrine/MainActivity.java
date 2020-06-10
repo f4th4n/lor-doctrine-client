@@ -1,4 +1,4 @@
-package com.lordoctrine;
+package top.bunga.lordoctrine;
 
 import android.os.Bundle;
 
