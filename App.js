@@ -10,7 +10,7 @@ import ScoreScreen from './src/screens/ScoreScreen'
 import reducers from './src/store/reducers/index'
 import config from './config.json'
 import { useFonts } from '@use-expo/font'
-import { AppLoading } from 'expo'
+import * as SplashScreen from 'expo-splash-screen'
 
 const store = createStore(reducers)
 const Stack = createStackNavigator()
@@ -23,7 +23,7 @@ function App() {
     montserrat: require('./assets/fonts/montserrat.otf'),
   })
 
-  if (!isLoaded) return <AppLoading />
+  if (!isLoaded) return <Text>Loading...</Text>
 
   return (
     <Provider store={store}>
